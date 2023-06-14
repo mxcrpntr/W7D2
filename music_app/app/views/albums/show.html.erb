@@ -1,0 +1,12 @@
+<p>This is the profile associated with the following album info:</p>
+<ul>
+    <li>title: <%= @album.title %></li>
+    <li>band: <%= @album.band.name %></li>
+    <li>year: <%= @album.year %></li>
+    <li>live?: <%= @album.live? %></li>
+</ul>
+<p><a href="<%= edit_album_url(@album.id) %>">Edit album</a> | <form action="<%= album_url(@album.id) %>" method="post">
+<input type="hidden" name="_method" value="delete">
+<input type="submit" value="Delete album">
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+</form> | <a href="<%= band_url(@album.band) %>">Return to <%= @album.band.name %>'s page</a></p>

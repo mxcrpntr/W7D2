@@ -1,0 +1,16 @@
+<p>This is <%= @band.name %>'s profile:</p>
+
+<br>
+<b> Albums</b>
+<% @band.albums.each do |album| %>
+<a href="<%= album_url(album.id) %>"><%= album.title %></a>
+<ul>
+    <li>year: <%= album.year %></li>
+    <li>live?: <%= album.live? %></li>
+</ul>
+<% end %>
+<p><a href="<%= edit_band_url(@band.id) %>">Edit band name</a> | <a href="<%= new_band_album_url(@band.id) %>">Add another <%= @band.name %> album to Music App!</a> | <form action="<%= band_url(@band.id) %>" method="post">
+<input type="hidden" name="_method" value="delete">
+<input type="submit" value="Delete band">
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+</form> | <a href="<%= bands_url %>">Show all bands!</a></p>

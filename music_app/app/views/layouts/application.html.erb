@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MusicApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+    a {
+      font-family: Didot;
+      color: yellow;
+      background-color: blueviolet;
+      border-radius: 100px;
+      width: 100px;
+    }
+    h1 {
+      font-family: Didot;
+      color: red;
+    }
+    .signs {
+      display = flex;
+      flex-flow = column nowrap;
+    }
+    
+    </style>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application" %>
+  </head>
+
+  <body>
+  <h1>Music App</h1>
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |error|%>
+      <%= error %>
+    <% end %>
+  <% end %>
+<% if logged_in? %>
+    <form action="<%= session_url %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Sign out">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    </form>
+  <% else %>
+    <a href="<%= new_session_url %>">Sign in</a> | <a href="<%= new_user_url %>">Sign up</a>
+  <% end %>
+    <%= yield %>
+  </body>
+</html>
